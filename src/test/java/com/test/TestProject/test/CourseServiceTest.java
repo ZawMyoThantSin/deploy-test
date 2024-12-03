@@ -11,8 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.mock.MockType;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -60,6 +62,20 @@ public class CourseServiceTest {
         Mockito.verify(repository , times(1)).save(entity);
         Mockito.verify(mapper, times(1)).map(entity, CourseDTO.class);
 
+    }
+
+    @Test
+    public void findById(){
+        Integer mockId = 1;
+        Mockito.when(repository.findById(mockId)).thenReturn(Optional.of(entity));
+        Mockito.when(mapper.map(entity, CourseDTO.class)).thenReturn(dto);
+
+        CourseDTO resDto = service.getById(mockId);
+        assertNotNull(resDto);
+        assertEquals(dto, resDto);
+
+        Mockito.verify(repository, times(1)).findById(mockId);
+        Mockito.verify(mapper , times(1)).map(entity, CourseDTO.class);
     }
 
 }
