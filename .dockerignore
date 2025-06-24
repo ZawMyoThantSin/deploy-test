@@ -1,0 +1,24 @@
+# Ignore Maven build output
+target/
+
+# Ignore IDE settings
+*.iml
+.idea/
+*.classpath
+*.project
+*.settings/
+
+# Ignore OS/macOS files
+.DS_Store
+Thumbs.db
+
+# Ignore Git
+.git
+.gitignore
+
+docker-compose.yml
+docker-compose.override.yml
+
+# Ignore logs and temp files
+*.log
+*.tmp
